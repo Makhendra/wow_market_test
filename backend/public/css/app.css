@@ -1,0 +1,139 @@
+:root {
+    --dark-grey: #31373e;
+    --light-grey: #f4f5f6;
+}
+
+.bg-white {
+    background: #ffffff;
+}
+
+.bg-grey {
+    background: #f8f9fa;
+}
+
+.border-light-grey {
+    border: 1px solid var(--light-grey);
+}
+
+.logo {
+    width: 60px;
+    margin-bottom: 20px;
+}
+
+.sidebar {
+    border-right: 4px solid var(--light-grey);
+}
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:hover,
+.btn-primary:focus {
+    background: var(--dark-grey);
+    border: none;
+    border-radius: 0;
+    border-color: var(--dark-grey);
+}
+
+.image {
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.btn-danger {
+    border: none;
+    border-radius: 0;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.list-group, .list-group-item, .list-group-item:first-child, .list-group-item:last-child {
+    border: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.list-group-item.active, .list-group-item.active:hover {
+    background: var(--dark-grey);
+    border-color: var(--dark-grey);
+}
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+    background: var(--dark-grey);
+    border-color: var(--dark-grey);
+}
+
+.pagination>li>a,
+.pagination>li>span,
+.pagination>li>a:hover,
+.pagination>li>a:focus,
+.pagination>li>span:focus,
+.pagination>li>span:hover{
+    color: var(--dark-grey);
+}
+
+label {
+    font-weight: 400;
+}
+
+.form-control {
+    border-radius: 0;
+}
+
+/*  Paddings  */
+
+.p-none {
+    padding: 0;
+}
+
+.pl-zero {
+    padding-left: 0;
+}
+
+.pr-zero {
+    padding-right: 0;
+}
+
+.p-15 {
+    padding: 15px;
+}
+
+/*  Margins  */
+.mb-5 {
+    margin-bottom: 5px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.mt-2 {
+    margin-top: 2px;
+}
+
+.mt-5 {
+    margin-top: 5px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+
+
+.d-inline-block {
+    display: inline-block;
+}
+
+
+.text-grey {
+    color: #858585;
+}

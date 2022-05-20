@@ -1,0 +1,47 @@
+version: "3.7"
+
+networks:
+  wow_market:
+    driver: bridge
+services:
+  app:
+    build:
+      args:
+        user: developer
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: wow_market
+    container_name: wow_market_test_app
+    restart: unless-stopped
+    working_dir: /var/www/backend
+    volumes:
+      - ./:/var/www
+    networks:
+      - wow_market
+
+  db:
+    image: mariadb:10.5.8
+    container_name: wow_market-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - wow_market
+
+  nginx:
+    image: nginx:1.17-alpine
+    container_name: wow_market-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d
+    networks:
+      - wow_market
