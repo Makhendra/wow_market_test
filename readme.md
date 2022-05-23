@@ -30,11 +30,11 @@ Admin имеет доступ ко всему
 > **password**: admin@admin.com
 
 Client имеет доступ на просмотр всего
-> **email**: client@client.com
+> **email**: client@client.com 
 > **password**: client@client.com
 
 Manager имеет доступ на CRUD всего кроме пользователей и ролей
-> **email**: manager@manager.com
+> **email**: manager@manager.com 
 > **password**: manager@manager.com
 
 
