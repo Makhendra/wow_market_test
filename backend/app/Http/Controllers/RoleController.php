@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateOrUpdateRoleRequest;
 use App\Role;
+use App\RolePermissions;
+use App\Services\PermissionsRoleService;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Application;
@@ -13,9 +15,8 @@ use Redirect;
 
 class RoleController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
-     *
      * @return Factory|Application|View
      */
     public function index()
@@ -25,8 +26,17 @@ class RoleController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
+     * @param CreateOrUpdateRoleRequest $request
+     * @return RedirectResponse
+     */
+    public function store(CreateOrUpdateRoleRequest $request): RedirectResponse
+    {
+        $role = Role::create($request->validated());
+        app(PermissionsRoleService::class)->updateOrCreate($role, $request->permissions_data);
+        return $this->redirectRolesPage();
+    }
+
+    /**
      * @return Application|Factory|View
      */
     public function create()
@@ -35,18 +45,15 @@ class RoleController extends Controller
             'action' => route('roles.store'),
             'title' => trans('texts.new_role'),
             'method' => method_field('POST'),
+            'permissions' => app(PermissionsRoleService::class)->generate()
         ]);
     }
 
     /**
-     * Role a newly created resource in storage.
-     *
-     * @param CreateOrUpdateRoleRequest $request
      * @return RedirectResponse
      */
-    public function store(CreateOrUpdateRoleRequest $request): RedirectResponse
+    private function redirectRolesPage(): RedirectResponse
     {
-        Role::create($request->validated());
         return Redirect::route('roles.index');
     }
 
@@ -62,7 +69,8 @@ class RoleController extends Controller
             'action' => route('roles.update', $role->id),
             'title' => trans('texts.edit_role'),
             'method' => method_field('PUT'),
-            'role' => $role
+            'role' => $role,
+            'permissions' => app(PermissionsRoleService::class)->generate($role)
         ]);
     }
 
@@ -76,7 +84,8 @@ class RoleController extends Controller
     public function update(CreateOrUpdateRoleRequest $request, Role $role): RedirectResponse
     {
         Role::findOrFail($role->id)->update($request->validated());
-        return Redirect::route('roles.index');
+        app(PermissionsRoleService::class)->updateOrCreate($role, $request->permissions_data);
+        return $this->redirectRolesPage();
     }
 
     /**
@@ -88,7 +97,8 @@ class RoleController extends Controller
      */
     public function destroy(Role $role): RedirectResponse
     {
+        RolePermissions::whereRoleId($role->id)->delete();
         Role::findOrFail($role->id)->delete();
-        return Redirect::route('roles.index');
+        return $this->redirectRolesPage();
     }
 }

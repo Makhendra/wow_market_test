@@ -23,8 +23,6 @@ class StoreController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
      * @return Factory|Application|View
      */
     public function index()
@@ -34,8 +32,6 @@ class StoreController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
      * @return Application|Factory|View
      */
     public function create()
@@ -48,8 +44,6 @@ class StoreController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
      * @param CreateOrUpdateStoreRequest $request
      * @return RedirectResponse
      */
@@ -60,8 +54,6 @@ class StoreController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
      * @param Store $store
      * @return Application|Factory|View
      */
@@ -76,8 +68,6 @@ class StoreController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
      * @param CreateOrUpdateStoreRequest $request
      * @param Store $store
      * @return RedirectResponse
@@ -89,8 +79,6 @@ class StoreController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
      * @param Store $store
      * @return RedirectResponse
      * @throws Exception

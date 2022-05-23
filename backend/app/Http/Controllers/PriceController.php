@@ -22,8 +22,16 @@ class PriceController extends Controller
 {
 
     /**
-     * Show the form for creating a new resource.
-     *
+     * @param CreatePriceRequest $request
+     * @return RedirectResponse
+     */
+    public function store(CreatePriceRequest $request): RedirectResponse
+    {
+        Price::create($request->validated());
+        return Redirect::route('prices.index');
+    }
+
+    /**
      * @return Application|Factory|View
      */
     public function create()
@@ -38,18 +46,6 @@ class PriceController extends Controller
             'products' => $products,
             'today' => Carbon::today()->format('Y-m-d\TH:i:s'),
         ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param CreatePriceRequest $request
-     * @return RedirectResponse
-     */
-    public function store(CreatePriceRequest $request): RedirectResponse
-    {
-        Price::create($request->validated());
-        return Redirect::route('prices.index');
     }
 
     /**

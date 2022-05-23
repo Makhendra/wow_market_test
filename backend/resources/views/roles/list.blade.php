@@ -1,10 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('title', __('texts.roles'))
 
 
 @section('button')
+    @if($global_permissions[$current_permission::SECTION_ROLES][$current_permission::ACTION_CREATE])
     <a href="{{ route('roles.create') }}" class="btn btn-primary">{{ __('texts.add_new')  }}</a>
+    @endif
 @endsection
 
 
@@ -20,21 +22,25 @@
                         <h4 class="media-heading">{{ $role->role }} #{{ $role->id }}</h4>
                     </div>
                     <div class="col-md-2">
-                        <a href="{{ route('roles.edit', $role->id) }}"
-                           class="btn btn-sm btn-primary">{{ __('texts.edit') }}</a>
-                        <form method="POST"
-                              class="d-inline-block"
-                              action="{{ route('roles.destroy', $role->id) }}">
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
-                            <button
-                                    type="button"
-                                    class="btn btn-sm btn-danger delete"
-                                    title='{{ __('texts.delete') }}'
-                            >
-                                {{ __('texts.delete') }}
-                            </button>
-                        </form>
+                        @if($global_permissions[$current_permission::SECTION_ROLES][$current_permission::ACTION_EDIT])
+                            <a href="{{ route('roles.edit', $role->id) }}"
+                               class="btn btn-sm btn-primary">{{ __('texts.edit') }}</a>
+                        @endif
+                        @if($global_permissions[$current_permission::SECTION_ROLES][$current_permission::ACTION_DELETE])
+                            <form method="POST"
+                                  class="d-inline-block"
+                                  action="{{ route('roles.destroy', $role->id) }}">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                <button
+                                        type="button"
+                                        class="btn btn-sm btn-danger delete"
+                                        title='{{ __('texts.delete') }}'
+                                >
+                                    {{ __('texts.delete') }}
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>

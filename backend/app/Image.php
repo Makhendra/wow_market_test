@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
+use phpDocumentor\Reflection\Types\Static_;
 
 /**
  * App\Image
@@ -26,6 +27,10 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Image whereSource($value)
  * @method static Builder|Image whereSourceId($value)
  * @method static Builder|Image whereUpdatedAt($value)
+ *
+ * @see Image::scopeSourceModel($type, $source_id)
+ * @method static Builder|self sourceModel($type, $source_id)
+ *
  * @mixin Eloquent
  */
 class Image extends Model
@@ -38,5 +43,15 @@ class Image extends Model
     public function image(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    /**
+     * @param Builder $query
+     * @param string $type
+     * @param int $source_id
+     * @return mixed
+     */
+    public function scopeSourceModel(Builder $query, string $type, int $source_id) {
+        return $query->whereSource($type)->whereSourceId($source_id);
     }
 }

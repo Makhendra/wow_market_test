@@ -11,22 +11,24 @@
 |
 */
 
-Route::get('/', function () {
-    return redirect('products.index');
+Route::get('/', 'Auth\LoginController@showLoginForm');
+
+Route::middleware(['auth', 'role'])->group(function () {
+    Route::resources([
+        'products' => 'ProductController',
+        'stores' => 'StoreController',
+        'users' => 'UserController',
+        'roles' => 'RoleController',
+    ]);
+
+    Route::prefix('prices')->group(function () {
+        Route::get('/', 'PriceController@create')->name('prices.index');
+        Route::post('/', 'PriceController@store')->name('prices.store');
+        Route::get('/lists', 'PriceController@list')->name('prices.lists');
+        Route::post('/lists', 'PriceController@generate')->name('prices.generate');
+    });
 });
 
-Route::resources([
-    'products' => 'ProductController',
-    'stores' => 'StoreController',
-    'users' => 'UserController',
-    'roles' => 'RoleController',
-]);
-
-Route::prefix('prices')->group(function () {
-    Route::get('/', 'PriceController@create')->name('prices.index');
-    Route::post('/', 'PriceController@store')->name('prices.store');
-    Route::get('/lists', 'PriceController@list')->name('prices.lists');
-    Route::post('/lists', 'PriceController@generate')->name('prices.generate');
-});
+Auth::routes();
 
 

@@ -25,8 +25,6 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
      * @return Factory|Application|View
      */
     public function index()
@@ -36,8 +34,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
      * @return Application|Factory|View
      */
     public function create()
@@ -52,8 +48,6 @@ class UserController extends Controller
     }
 
     /**
-     * User a newly created resource in storage.
-     *
      * @param CreateUserRequest $request
      * @return RedirectResponse
      */
@@ -64,8 +58,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
      * @param User $user
      * @return Application|Factory|View
      */
@@ -82,8 +74,6 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
      * @param UpdateUserRequest $request
      * @param User $user
      * @return RedirectResponse
@@ -104,8 +94,6 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
      * @param User $user
      * @return RedirectResponse
      * @throws Exception

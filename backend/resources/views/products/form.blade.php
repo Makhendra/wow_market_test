@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('title', $title)
 
@@ -12,12 +12,12 @@
             {{ csrf_field() }}
             <div class="form-group">
                 <label class="control-label" for="code">{{ __('texts.product_code') }}</label>
-                <input name="code" id="code" type="text" class="form-control" value="{{ $product->code ?? '' }}"
+                <input name="code" id="code" type="text" class="form-control" value="{{ $product->code ?? old('code') }}"
                        required>
             </div>
             <div class="form-group">
                 <label class="control-label" for="name">{{ __('texts.product_name') }}</label>
-                <input name="name" id="name" type="text" class="form-control" value="{{ $product->name ?? '' }}" required>
+                <input name="name" id="name" type="text" class="form-control" value="{{ $product->name ?? old('name') }}" required>
             </div>
             <div class="form-group row">
 
@@ -40,7 +40,7 @@
             <div class="form-group">
                 <label class="control-label" for="description">{{ __('texts.description') }}</label>
                 <textarea name="description" id="description" cols="30" rows="10"
-                          class="form-control">{{ $product->description ?? '' }}</textarea>
+                          class="form-control">{{ $product->description ?? old('description') }}</textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">

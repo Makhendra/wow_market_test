@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property string $role
+ * @property array $permissions_data
+ */
 class CreateOrUpdateRoleRequest extends FormRequest
 {
     /**
@@ -25,6 +29,7 @@ class CreateOrUpdateRoleRequest extends FormRequest
     {
         return [
             'role' => 'required',
+            'permissions_data' => 'nullable|array'
         ];
     }
 }

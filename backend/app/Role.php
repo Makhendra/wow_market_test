@@ -21,7 +21,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Role extends Model
 {
     const ADMIN = 'admin';
-    const USER = 'user';
+    const CLIENT = 'client';
+    const MANAGER = 'manager';
 
     public $timestamps = false;
 
@@ -36,4 +37,13 @@ class Role extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    /**
+     * Get the post that owns the comment.
+     */
+    public function permission(): HasOne
+    {
+        return $this->hasOne(RolePermissions::class);
+    }
+
 }

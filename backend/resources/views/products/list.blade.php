@@ -1,10 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('title', __('texts.products'))
 
 
 @section('button')
-    <a href="{{ route('products.create') }}" class="btn btn-primary">{{ __('texts.add_new')  }}</a>
+    @if($global_permissions[$current_permission::SECTION_PRODUCTS][$current_permission::ACTION_CREATE])
+        <a href="{{ route('products.create') }}" class="btn btn-primary">{{ __('texts.add_new')  }}</a>
+    @endif
 @endsection
 
 
@@ -23,21 +25,25 @@
                         {{ $product->short_description }}
                     </div>
                     <div class="col-md-2">
-                        <a href="{{ route('products.edit', $product->id) }}"
-                           class="btn btn-sm btn-primary">{{ __('texts.edit') }}</a>
-                        <form method="POST"
-                              class="d-inline-block"
-                              action="{{ route('products.destroy', $product->id) }}">
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
-                            <button
-                                    type="button"
-                                    class="btn btn-sm btn-danger delete"
-                                    title='{{ __('texts.delete') }}'
-                            >
-                                {{ __('texts.delete') }}
-                            </button>
-                        </form>
+                        @if($global_permissions[$current_permission::SECTION_PRODUCTS][$current_permission::ACTION_EDIT])
+                            <a href="{{ route('products.edit', $product->id) }}"
+                               class="btn btn-sm btn-primary">{{ __('texts.edit') }}</a>
+                        @endif
+                        @if($global_permissions[$current_permission::SECTION_PRODUCTS][$current_permission::ACTION_DELETE])
+                            <form method="POST"
+                                  class="d-inline-block"
+                                  action="{{ route('products.destroy', $product->id) }}">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                <button
+                                        type="button"
+                                        class="btn btn-sm btn-danger delete"
+                                        title='{{ __('texts.delete') }}'
+                                >
+                                    {{ __('texts.delete') }}
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>

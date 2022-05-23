@@ -16,7 +16,7 @@ class CreateRolePermissionsTable extends Migration
         Schema::create('role_permissions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('role_id')->unsigned();
-            $table->json('permissions')->nullable();
+            $table->json('permissions_info')->default('{}');
             $table->timestamps();
             $table->foreign('role_id')->references('id')->on('user_roles');
         });

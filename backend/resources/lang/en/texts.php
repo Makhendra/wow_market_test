@@ -48,4 +48,8 @@ return [
     'show_price_list' => 'Show price list',
     'save_role' => 'Save role',
     'edit_role' => 'Edit role',
+    'section' => 'Section',
+    'actions' => 'Actions',
+    'logout' => 'Logout',
+    'forbidden' => 'Forbidden'
 ];
