@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -29,7 +30,7 @@ class GeneratePriceListRequest extends FormRequest
     {
         return [
             'store_id' => 'nullable|exists:stores,id',
-            'starts_at' => 'required',
+            'starts_at' => 'required|date_format:Y-m-d H:i:s',
         ];
     }
 
@@ -38,8 +39,10 @@ class GeneratePriceListRequest extends FormRequest
      */
     protected function prepareForValidation(): void
     {
+        $starts_at = Carbon::createFromFormat('Y-m-d\TH:i:s', $this->starts_at);
         $this->merge([
             'store_id' => $this->store_id == 'null' ? null : $this->store_id,
+            'starts_at' => $starts_at->format('Y-m-d H:i:s'),
         ]);
     }
 }

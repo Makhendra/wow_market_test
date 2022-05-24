@@ -13,13 +13,13 @@ class PermissionsRoleService
      * @param Role|null $role
      * @return Collection
      */
-    public function generate(?Role $role = null): Collection
+    public function getRolePermissions(?Role $role = null): Collection
     {
-        $permissions_role = $role ? RolePermissions::whereRoleId($role->id)->first() : null;
-        if (!$permissions_role) {
-            $permissions_role = $this->updateOrCreate($role);
+        $permissionsRole = $role ? RolePermissions::whereRoleId($role->id)->first() : null;
+        if (!$permissionsRole) {
+            $permissionsRole = $this->updateOrCreate($role);
         }
-        $permissions_data = $this->generatePermissionsArray($permissions_role->permissions_info ?? []);
+        $permissions_data = $this->generatePermissionsArray($permissionsRole->permissions_info ?? []);
         return collect($permissions_data);
     }
 
@@ -42,16 +42,16 @@ class PermissionsRoleService
     }
 
     /**
-     * @param array $allowed_permissions
+     * @param array $allowedPermissions
      * @return array
      */
-    public function generatePermissionsArray(array $allowed_permissions = []): array
+    public function generatePermissionsArray(array $allowedPermissions = []): array
     {
         $sections_permissions = [];
         foreach (RolePermissions::SECTIONS as $section) {
             foreach (RolePermissions::ACTIONS as $action) {
-                $is_enabled = $allowed_permissions[$section][$action] ?? false;
-                $sections_permissions[$section][$action] = $is_enabled == '1';
+                $isEnabled = $allowedPermissions[$section][$action] ?? false;
+                $sections_permissions[$section][$action] = $isEnabled == '1';
             }
         }
         return $sections_permissions;

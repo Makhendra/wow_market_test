@@ -10,23 +10,23 @@ class PriceService
     const PER_PAGE = 10;
 
     /**
-     * @param int|null $store_id
-     * @param string $starts_at
-     * @param int $per_page
+     * @param int|null $storeId
+     * @param string $startsAt
+     * @param int $perPage
      * @return LengthAwarePaginator
      */
-    public function getStorePrices(?int $store_id, string $starts_at, int $per_page = self::PER_PAGE): LengthAwarePaginator
+    public function getStorePrices(?int $storeId, string $startsAt, int $perPage = self::PER_PAGE): LengthAwarePaginator
     {
         $query = Price::with('product');
 
-        if ($store_id) {
-            $query->whereStoreId($store_id);
+        if ($storeId) {
+            $query->whereStoreId($storeId);
         }
 
-        if ($starts_at) {
-            $query->where('starts_at', '>=', $starts_at);
+        if ($startsAt) {
+            $query->where('starts_at', '>=', $startsAt);
         }
 
-        return $query->paginate($per_page);
+        return $query->paginate($perPage);
     }
 }

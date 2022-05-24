@@ -24,8 +24,8 @@ class CreateOrUpdateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => 'required|min:6|max:255',
-            'name' => 'required|max:255',
+            'code' => 'required|alpha_num|min:6|max:6',
+            'name' => 'required|min:3|max:255',
             'description' => 'nullable|max:255',
             'image' => [
                 'nullable',
@@ -34,7 +34,7 @@ class CreateOrUpdateProductRequest extends FormRequest
                 'dimensions:min_width=100,max_width=500,min_height=100,max_height=500',
                 'max:250'
             ],
-            'image_delete' => 'nullable'
+            'image_delete' => 'nullable|boolean'
         ];
     }
 }

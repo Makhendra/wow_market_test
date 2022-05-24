@@ -28,7 +28,7 @@ class CreateOrUpdateRoleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'role' => 'required',
+            'role' => 'required|alpha|unique:user_roles,role',
             'permissions_data' => 'nullable|array'
         ];
     }

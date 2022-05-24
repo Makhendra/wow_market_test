@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\DTO\SourceImageDTO;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -28,8 +29,8 @@ use phpDocumentor\Reflection\Types\Static_;
  * @method static Builder|Image whereSourceId($value)
  * @method static Builder|Image whereUpdatedAt($value)
  *
- * @see Image::scopeSourceModel($type, $source_id)
- * @method static Builder|self sourceModel($type, $source_id)
+ * @see Image::scopeSourceModel($sourceImageDTO)
+ * @method static Builder|self sourceModel($sourceImageDTO)
  *
  * @mixin Eloquent
  */
@@ -47,11 +48,10 @@ class Image extends Model
 
     /**
      * @param Builder $query
-     * @param string $type
-     * @param int $source_id
+     * @param SourceImageDTO $sourceImageDTO
      * @return mixed
      */
-    public function scopeSourceModel(Builder $query, string $type, int $source_id) {
-        return $query->whereSource($type)->whereSourceId($source_id);
+    public function scopeSourceModel(Builder $query, SourceImageDTO $sourceImageDTO) {
+        return $query->whereSource($sourceImageDTO->getType())->whereSourceId($sourceImageDTO->getModelId());
     }
 }

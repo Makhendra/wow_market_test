@@ -83,9 +83,9 @@ class UserController extends Controller
         if ($request->validated()) {
             $user->update($request->except('password'));
 
-            $new_password = $request->get('password');
-            if($new_password) {
-                $user->password = Hash::make($new_password);
+            $newPassword = $request->get('password');
+            if($newPassword) {
+                $user->password = Hash::make($newPassword);
                 $user->save();
             }
         }

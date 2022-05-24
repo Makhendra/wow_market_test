@@ -14,15 +14,15 @@ class CreatePricesTable extends Migration
     public function up()
     {
         Schema::create('prices', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('product_id')->unsigned();
-            $table->integer('store_id')->nullable()->unsigned();
+            $table->bigIncrements('id');
+            $table->bigInteger('product_id')->unsigned();
+            $table->bigInteger('store_id')->nullable()->unsigned();
             $table->float('price');
-            $table->dateTime('starts_at');
+            $table->timestamp('starts_at');
             $table->timestamps();
 
             $table->foreign('store_id')->references('id')->on('stores');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 

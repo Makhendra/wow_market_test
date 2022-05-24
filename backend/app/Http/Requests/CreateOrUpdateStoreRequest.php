@@ -24,7 +24,7 @@ class CreateOrUpdateStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
+            'name' => 'required|min:3|max:255',
             'description' => 'nullable',
         ];
     }

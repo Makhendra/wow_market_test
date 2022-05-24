@@ -45,7 +45,7 @@ class RoleController extends Controller
             'action' => route('roles.store'),
             'title' => trans('texts.new_role'),
             'method' => method_field('POST'),
-            'permissions' => app(PermissionsRoleService::class)->generate()
+            'permissions' => app(PermissionsRoleService::class)->getRolePermissions()
         ]);
     }
 
@@ -70,7 +70,7 @@ class RoleController extends Controller
             'title' => trans('texts.edit_role'),
             'method' => method_field('PUT'),
             'role' => $role,
-            'permissions' => app(PermissionsRoleService::class)->generate($role)
+            'permissions' => app(PermissionsRoleService::class)->getRolePermissions($role)
         ]);
     }
 
