@@ -12,8 +12,8 @@
     @foreach($prices as $price)
         <tr>
             <td>{{ $price->id }}</td>
-            <td>{{ $price->product->code }}</td>
-            <td>{{ $price->product->name }}</td>
+            <td>{{ $price->code }}</td>
+            <td>{{ $price->name }}</td>
             <td>{{ $price->price }}</td>
         </tr>
     @endforeach

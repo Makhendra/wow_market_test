@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * @property string $starts_at
+ * @property int|null $store_id
  */
 class CreatePriceRequest extends FormRequest
 {
@@ -42,7 +43,8 @@ class CreatePriceRequest extends FormRequest
     {
         $starts_at = Carbon::createFromFormat('Y-m-d\TH:i:s', $this->starts_at);
         $this->merge([
-            'starts_at' => $starts_at->format('Y-m-d H:i:s')
+            'starts_at' => $starts_at->format('Y-m-d H:i:s'),
+            'store_id' => is_numeric($this->store_id) ? intval($this->store_id) : null,
         ]);
     }
 }
